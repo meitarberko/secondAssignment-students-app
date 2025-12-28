@@ -1,4 +1,4 @@
-package com.yourpackage.studentsapp.data
+package com.example.secondassignmentstudentsapp.data
 
 data class Student(
     val id: String,

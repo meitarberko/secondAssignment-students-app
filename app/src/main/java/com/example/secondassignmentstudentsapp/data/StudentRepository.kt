@@ -1,4 +1,4 @@
-package com.yourpackage.studentsapp.data
+package com.example.secondassignmentstudentsapp.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardElevation="2dp"
+    app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Medium">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/ivStudent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_student"
+            android:contentDescription="student picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Student name"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/ivStudent"
+            app:layout_constraintEnd_toStartOf="@id/cbChecked"
+            app:layout_constraintTop_toTopOf="@id/ivStudent"
+            android:layout_marginStart="12dp"/>
+
+        <TextView
+            android:id="@+id/tvId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Student id"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintEnd_toEndOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            android:layout_marginTop="2dp"/>
+
+        <CheckBox
+            android:id="@+id/cbChecked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="checked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
