@@ -1,4 +1,4 @@
-package com.yourpackage.studentsapp.utils
+package com.example.secondassignmentstudentsapp.utils
 
 object IntentKeys {
     const val EXTRA_STUDENT_ID = "extra_student_id"
