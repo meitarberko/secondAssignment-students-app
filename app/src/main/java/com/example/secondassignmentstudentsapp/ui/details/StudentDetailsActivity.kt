@@ -1,9 +1,11 @@
 package com.example.secondassignmentstudentsapp.ui.details
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.secondassignmentstudentsapp.databinding.ActivityStudentDetailsBinding
+import com.example.secondassignmentstudentsapp.ui.form.EditStudentActivity
 import com.example.secondassignmentstudentsapp.utils.IntentKeys
 
 class StudentDetailsActivity : AppCompatActivity() {
@@ -28,7 +30,10 @@ class StudentDetailsActivity : AppCompatActivity() {
         }
 
         binding.btnEdit.setOnClickListener {
-            // TODO (Edit commit): open EditStudentActivity with EXTRA_STUDENT_ID
+            val intent = Intent(this, EditStudentActivity::class.java).apply {
+                putExtra(IntentKeys.EXTRA_STUDENT_ID, studentId)
+            }
+            startActivity(intent)
         }
     }
 
