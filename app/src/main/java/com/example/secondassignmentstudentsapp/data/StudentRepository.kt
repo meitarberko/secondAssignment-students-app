@@ -38,10 +38,13 @@ object StudentRepository {
     }
 
     fun delete(id: String): Boolean {
-        val removed = students.removeIf { it.id == id }
-        if (removed) publish()
-        return removed
+        val index = students.indexOfFirst { it.id == id }
+        if (index == -1) return false
+        students.removeAt(index)
+        publish()
+        return true
     }
+
 
     fun toggleChecked(id: String): Boolean {
         val index = students.indexOfFirst { it.id == id }

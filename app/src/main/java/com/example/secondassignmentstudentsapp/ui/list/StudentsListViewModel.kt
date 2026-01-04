@@ -7,13 +7,19 @@ import com.example.secondassignmentstudentsapp.data.StudentRepository
 
 class StudentsListViewModel : ViewModel() {
 
-    val students: LiveData<List<Student>> = StudentRepository.studentsLiveData
+    val studentsLiveData: LiveData<List<Student>> = StudentRepository.studentsLiveData
 
-    fun init() {
+    init {
         StudentRepository.seedIfEmpty()
+    }
+
+    fun refresh() {
+        // No-op: repository already pushes changes via LiveData
     }
 
     fun toggleChecked(studentId: String) {
         StudentRepository.toggleChecked(studentId)
     }
+
+    fun getStudent(studentId: String): Student? = StudentRepository.getById(studentId)
 }
