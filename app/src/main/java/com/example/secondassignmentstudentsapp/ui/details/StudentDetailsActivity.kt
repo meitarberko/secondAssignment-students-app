@@ -35,6 +35,10 @@ class StudentDetailsActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+        binding.btnCloseDetails.setOnClickListener {
+            finish() // הפקודה שסוגרת את המסך וחוזרת אחורה
+        }
     }
 
     override fun onResume() {

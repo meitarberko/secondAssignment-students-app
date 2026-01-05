@@ -17,21 +17,43 @@ class NewStudentActivity : AppCompatActivity() {
         binding = ActivityNewStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnCancel.setOnClickListener { finish() }
-
         binding.btnSave.setOnClickListener {
-            val student = Student(
-                id = binding.etId.text?.toString().orEmpty().trim(),
-                name = binding.etName.text?.toString().orEmpty().trim(),
-                phone = binding.etPhone.text?.toString().orEmpty().trim(),
-                address = binding.etAddress.text?.toString().orEmpty().trim(),
-                isChecked = binding.cbChecked.isChecked
-            )
-
-            when (val res = viewModel.createStudent(student)) {
-                is ValidationResult.Success -> finish()
-                is ValidationResult.Error -> Toast.makeText(this, res.message, Toast.LENGTH_SHORT).show()
-            }
+            saveStudent()
         }
+
+        binding.btnCancel.setOnClickListener {
+            finish()
+        }
+
+
+
+    }
+    private fun saveStudent() {
+        val name = binding.etName.text.toString().trim()
+        val id = binding.etId.text.toString().trim()
+        val phone = binding.etPhone.text.toString().trim()
+        val address = binding.etAddress.text.toString().trim()
+        val isChecked = binding.cbChecked.isChecked
+
+        if (name.isEmpty() || id.isEmpty()) {
+            return
+        }
+
+        val student = Student(
+            id = id,
+            name = name,
+            phone = phone,
+            address = address,
+            isChecked = isChecked
+        )
+
+        viewModel.createStudent(name = name,
+            id = id,
+            phone = phone,
+            address = address,
+            checked = isChecked)
+
+        finish()
     }
 }
+

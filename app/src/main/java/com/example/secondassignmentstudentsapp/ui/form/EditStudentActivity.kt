@@ -67,5 +67,11 @@ class EditStudentActivity : AppCompatActivity() {
             viewModel.updateStudent(originalId, updated)
             finish()
         }
+
+
+        binding.btnCancel.setOnClickListener {
+            // הפקודה finish() סוגרת את ה-Activity הנוכחי וחוזרת למסך הקודם
+            finish()
+        }
     }
 }
