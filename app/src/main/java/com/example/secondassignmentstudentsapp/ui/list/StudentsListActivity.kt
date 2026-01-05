@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.secondassignmentstudentsapp.databinding.ActivityStudentsListBinding
 import com.example.secondassignmentstudentsapp.ui.details.StudentDetailsActivity
+import com.example.secondassignmentstudentsapp.ui.form.NewStudentActivity
 import com.example.secondassignmentstudentsapp.utils.IntentKeys
 
 class StudentsListActivity : AppCompatActivity() {
@@ -35,15 +36,15 @@ class StudentsListActivity : AppCompatActivity() {
         binding.rvStudents.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
-            // TODO: open NewStudentActivity when implemented
-        }
+            val intent = Intent(this, NewStudentActivity::class.java)
 
-        // Observe list
-        viewModel.studentsLiveData.observe(this) { students ->
-            adapter.submitList(students)
+            startActivity(intent)
+
+            viewModel.studentsLiveData.observe(this) { students ->
+                adapter.submitList(students)
+            }
         }
     }
-
     override fun onResume() {
         super.onResume()
         viewModel.refresh()
