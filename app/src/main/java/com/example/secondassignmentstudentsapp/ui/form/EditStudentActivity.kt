@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.secondassignmentstudentsapp.data.Student
 import com.example.secondassignmentstudentsapp.databinding.ActivityEditStudentBinding
-import com.example.secondassignmentstudentsapp.ui.details.EditStudentViewModel
 import com.example.secondassignmentstudentsapp.utils.IntentKeys
 
 class EditStudentActivity : AppCompatActivity() {
@@ -21,21 +21,13 @@ class EditStudentActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         originalId = intent.getStringExtra(IntentKeys.EXTRA_STUDENT_ID) ?: run {
-            finish()
-            return
+            finish(); return
         }
 
-        val student = viewModel.getStudent(originalId) ?: run {
-            finish()
-            return
+        val s = viewModel.getStudent(originalId) ?: run {
+            finish(); return
         }
-
-        // Prefill
-        binding.etName.setText(student.name)
-        binding.etId.setText(student.id)
-        binding.etPhone.setText(student.phone)
-        binding.etAddress.setText(student.address)
-        binding.cbChecked.isChecked = student.isChecked
+        bindStudent(s)
 
         binding.btnCancel.setOnClickListener { finish() }
 
@@ -45,33 +37,31 @@ class EditStudentActivity : AppCompatActivity() {
         }
 
         binding.btnSave.setOnClickListener {
-            val name = binding.etName.text.toString().trim()
-            val id = binding.etId.text.toString().trim()
-            val phone = binding.etPhone.text.toString().trim()
-            val address = binding.etAddress.text.toString().trim()
-            val checked = binding.cbChecked.isChecked
-
-            if (name.isBlank() || id.isBlank()) {
-                Toast.makeText(this, "Name and ID are required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            val updated = readStudentFromForm()
+            val ok = viewModel.updateStudent(originalId, updated)
+            if (ok) {
+                finish()
+            } else {
+                Toast.makeText(this, "Invalid data or ID already exists", Toast.LENGTH_SHORT).show()
             }
-
-            val updated = student.copy(
-                name = name,
-                id = id,
-                phone = phone,
-                address = address,
-                isChecked = checked
-            )
-
-            viewModel.updateStudent(originalId, updated)
-            finish()
         }
+    }
 
+    private fun bindStudent(s: Student) {
+        binding.etName.setText(s.name)
+        binding.etId.setText(s.id)
+        binding.etPhone.setText(s.phone)
+        binding.etAddress.setText(s.address)
+        binding.cbChecked.isChecked = s.isChecked
+    }
 
-        binding.btnCancel.setOnClickListener {
-            // הפקודה finish() סוגרת את ה-Activity הנוכחי וחוזרת למסך הקודם
-            finish()
-        }
+    private fun readStudentFromForm(): Student {
+        return Student(
+            id = binding.etId.text.toString().trim(),
+            name = binding.etName.text.toString().trim(),
+            phone = binding.etPhone.text.toString().trim(),
+            address = binding.etAddress.text.toString().trim(),
+            isChecked = binding.cbChecked.isChecked
+        )
     }
 }

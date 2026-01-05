@@ -22,7 +22,6 @@
         <activity android:name=".ui.form.EditStudentActivity" />
         <activity android:name=".ui.form.NewStudentActivity" />
 
-        <!-- Optional (אם לא משתמשת – אפשר למחוק בעתיד) -->
         <activity android:name=".MainActivity" />
 
     </application>
