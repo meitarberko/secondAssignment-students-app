@@ -10,13 +10,10 @@ class StudentsListViewModel : ViewModel() {
     val studentsLiveData: LiveData<List<Student>> = StudentRepository.studentsLiveData
 
     init {
-        // Ensure initial data exists on first app launch
         StudentRepository.seedIfEmpty()
     }
 
     fun refresh() {
-        // No-op: repository updates LiveData internally (publish()).
-        // Exists because Activity may call refresh() onResume.
     }
 
     fun toggleChecked(studentId: String) {
