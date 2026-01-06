@@ -1,5 +1,6 @@
 package com.example.secondassignmentstudentsapp.ui.details
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -21,12 +22,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         studentId = intent.getStringExtra(IntentKeys.EXTRA_STUDENT_ID) ?: run {
-            finish()
-            return
-        }
-
-        binding.cbChecked.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setChecked(studentId, isChecked)
+            finish(); return
         }
 
         binding.btnEdit.setOnClickListener {
@@ -36,8 +32,12 @@ class StudentDetailsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.cbChecked.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setChecked(studentId, isChecked)
+        }
+
         binding.btnCloseDetails.setOnClickListener {
-            finish() // הפקודה שסוגרת את המסך וחוזרת אחורה
+            finish()
         }
     }
 
@@ -46,10 +46,10 @@ class StudentDetailsActivity : AppCompatActivity() {
         render()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun render() {
         val s = viewModel.getStudent(studentId) ?: run {
-            finish()
-            return
+            finish(); return
         }
 
         binding.tvName.text = "name: ${s.name}"
@@ -63,7 +63,6 @@ class StudentDetailsActivity : AppCompatActivity() {
             viewModel.setChecked(studentId, isChecked)
         }
 
-        // If ID was changed later in Edit screen, keep pointer updated safely
         studentId = s.id
     }
 }

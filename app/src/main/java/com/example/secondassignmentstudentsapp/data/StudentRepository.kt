@@ -14,9 +14,9 @@ object StudentRepository {
         if (students.isNotEmpty()) return
         students.addAll(
             listOf(
-                Student("1001", "Kuku", "05434534534", "Rishon LeZion", true),
-                Student("1002", "Dana", "0521234567", "Tel Aviv", false),
-                Student("1003", "Noam", "0507654321", "Haifa", false),
+                Student("1001", "Hadar", "0509796100", "Tel Aviv", true),
+                Student("1002", "Meitar", "0504532007", "Hod Hasharon", true),
+                Student("1003", "Avshi", "0528057979", "Rishon LeZion", false),
             )
         )
         publish()
